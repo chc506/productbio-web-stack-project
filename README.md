@@ -20,6 +20,16 @@ of the search will be shown. A user should be able to search and filter
 across all fields available.
 
 
+## Getting Started
+
+To get started with this repo, run the following commands:
+
+    pip install -r requirements.txt
+    python manage.py migrate
+    python manage.py runserver
+
+You should now be able to navigate your browser to http://localhost:8000 
+
 ## Deliverables
 
 - Fork this repository and push your changes to that fork.
