@@ -20,8 +20,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 ]
 
-urlpatterns += patterns( 'search.views',
-    url( regex=r'^search$',
-         view='run_search',
-         name='search' ),
-)
+# urlpatterns += patterns( 'search.views',
+#     url( regex=r'^search$',
+#          view='run_search',
+#          name='search' ),
+# )
