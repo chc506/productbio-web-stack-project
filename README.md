@@ -32,7 +32,6 @@ You should now be able to navigate your browser to http://localhost:8000
 
 ## Deliverables
 
-- Fork this repository and push your changes to that fork.
 - Clearly document the additional code you've added
 - Clearly document any additional setup that must be done if use additional
   libraries or tools.
