@@ -1,3 +1,4 @@
+<!-- base code -->
 <!--
 <!DOCTYPE html>
 <html lang="en">
@@ -11,25 +12,70 @@
 </html>
 -->
 
+<!-- Enhao's code -->
 <!doctype html>
 <html lang="en">
-  <head>
+  	<head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-  </body>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<!-- Bootstrap CSS -->
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    	<!-- Optional JavaScript -->
+    	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    	
+    	<title>Week1: Search Tool</title>
+  	</head>
+  	<body>
+    	<div class="container">
+  			<div class="jumbotron">
+   				<h1>Search for San Francisco FY14-15 purchase record.</h1> 
+    			<p>ProductBio week1 mini project.</p>
+    			<p>Author: Enhao Cui</p> 
+  			</div>
+  			<div class="input-group">
+  				<input type="text" id = "key0" class="form-control" placeholder="mm/dd/yy" aria-describedby="basic-addon1" onkeyup="keyup(event)">
+			</div>
+			<div class="input-group">
+  				<input type="text" id = "key1" class="form-control" placeholder="vendor" aria-describedby="basic-addon1" onkeyup="keyup(event)">
+			</div>
+			<div class="input-group">
+  				<input type="text" id = "key2" class="form-control" placeholder="description" aria-describedby="basic-addon1" onkeyup="keyup(event)">
+			</div>
+			<div class="input-group">
+  				<input type="text" id = "key3" class="form-control" placeholder="quantity" aria-describedby="basic-addon1" onkeyup="keyup(event)">
+			</div>
+			<div class="input-group">
+  				<input type="text" id = "key4" class="form-control" placeholder="invoice amount" aria-describedby="basic-addon1" onkeyup="keyup(event)">
+			</div>
+			<button class="btn btn-info" onclick= "query()">
+      			<span class="glyphicon glyphicon-search"></span> Search
+    		</button>
+		</div>
+		<script>
+			function query() {
+				var x = [];
+				var count = 0
+				for (var i = 0; i < 5; i++) {
+					var str = document.getElementById("key" + i).value
+					if (str == '') {
+						count ++;
+					}
+					x.push(str);
+				}
+    			if (count < 5) {
+    				window.location.href += "?q=" + x.join();
+    			}
+			}
+			function keyup(e) {
+    			if (e.keyCode === 13) { //enter pressed
+    				query();
+    			}
+    		}
+		</script>
+  	</body>
 </html>
