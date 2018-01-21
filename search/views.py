@@ -5,6 +5,7 @@
 # @Last Modified by:   ahuynh
 # @Last Modified time: 2015-06-08 10:02:31
 from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
 import csv
 
 # Read csv file and search for corresonding attributes
@@ -60,3 +61,6 @@ def run_search( request ):
     # TODO: Properly handle search query.
     m = search_csv(query)
     return render_to_response( 'query.html', m)
+
+def redirect_root(request):
+	return HttpResponseRedirect('/search')

@@ -25,3 +25,11 @@ urlpatterns += patterns( 'search.views',
           view='run_search',
           name='search' ),
  )
+
+#redirect home page to search page
+urlpatterns += patterns( 'search.views',
+     url( regex=r'',
+          view='redirect_root',
+          name='home' ),
+ )
+
