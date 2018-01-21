@@ -22,6 +22,11 @@ across all fields available.
 
 ## Getting Started
 
+Launch the pyenv virutual environment first:
+    pyenv virtualenv 3.5.1 sourcery
+    pyenv activate sourcery
+
+
 To get started with this repo, run the following commands:
 
     pip install -r requirements.txt
