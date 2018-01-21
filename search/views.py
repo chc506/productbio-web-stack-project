@@ -17,6 +17,10 @@ def search_csv( request ):
 		reader = csv.DictReader(csvfile, delimiter=',')
 		for row in reader:
 			row.pop('') # There is an empty key in the dict
+			s = set(row.values())
+			if len(s) == 1 and '' in s: # ignore all the trailing empty records
+				print ("empty records")
+				break
 			valid = True
 			for k, v in zip(attributes, request):
 				if not v: # ignore empty search
@@ -25,7 +29,11 @@ def search_csv( request ):
 					valid = False
 					continue
 				if k == 'INVOICE AMT': # compare the price (should be in range low - high)
-					low, high = v.split('-') # low, high
+					prices = v.split('-')
+					if len(prices) == 2:
+						low, high = prices[0], prices[1] # low, high, range inquiry
+					else:
+						low = high = prices[0] # accurate fit
 					low, high = float(low.replace(',','')), float(high.replace(',',''))
 					target = float(row[k].lstrip(' $\t').replace(',',''))
 					if target < low or target > high:
