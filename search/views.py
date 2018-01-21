@@ -20,9 +20,9 @@ def search_csv( request ):
 			for k, v in zip(attributes, request):
 				if not v: # ignore empty search
 					continue
-				if not row[k]: # ignore all the trailing empty records..
+				if not row[k]: # ignore empty records
 					valid = False
-					break
+					continue
 				if k == 'INVOICE AMT': # compare the price (should be in range low - high)
 					low, high = v.split('-') # low, high
 					low, high = float(low.replace(',','')), float(high.replace(',',''))
@@ -36,10 +36,14 @@ def search_csv( request ):
 					if float(v) != float(t):
 						valid = False
 						break
-				elif v not in row[k]: # for other search keys, check if searched value is the substring of the record
+				elif v.lower() not in row[k].lower(): # for other search keys, check if searched value is the substring of the record
 					valid = False
 					break
 			if valid:
+				row['INVOICE_AMT'] = row['INVOICE AMT']
+				row.pop('INVOICE AMT')
+				row['POST_DATE'] = row['POST DATE']
+				row.pop('POST DATE')
 				res['result'].append(row)
 	return res
 
