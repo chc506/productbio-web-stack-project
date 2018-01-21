@@ -9,18 +9,34 @@ import csv
 
 # Read csv file and search for corresonding attributes
 def search_csv( request ):
-	request = request.split(',')
+	request = request.split(',') # the search keys for all the attributes
 	attributes = ['POST DATE','VENDOR','DESCRIPTION','QTY','INVOICE AMT']
 	res = {'result':[]}
 	with open('sample_data/San Francisco FY14-15.csv') as csvfile:
 		reader = csv.DictReader(csvfile, delimiter=',')
 		for row in reader:
-			row.pop('')
+			row.pop('') # There is an empty key in the dict
 			valid = True
 			for k, v in zip(attributes, request):
-				if not v:
+				if not v: # ignore empty search
 					continue
-				if row[k] != v:
+				if not row[k]: # ignore all the trailing empty records..
+					valid = False
+					break
+				if k == 'INVOICE AMT': # compare the price (should be in range low - high)
+					low, high = v.split('-') # low, high
+					low, high = float(low.replace(',','')), float(high.replace(',',''))
+					target = float(row[k].lstrip(' $\t').replace(',',''))
+					if target < low or target > high:
+						valid = False
+						break
+				elif k == 'QTY':
+					v = v.replace(',','')
+					t = row[k].replace(',','')
+					if float(v) != float(t):
+						valid = False
+						break
+				elif v not in row[k]: # for other search keys, check if searched value is the substring of the record
 					valid = False
 					break
 			if valid:
