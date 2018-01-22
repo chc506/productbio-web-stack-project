@@ -2,8 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <title>Search Result</title>
+        <style type="text/css">
+            p{
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
-    	Display search results here.
+    	<p style="font-size: 20px">You searched for: <strong>{{ query }}</strong> in category: <strong>{{ value }}</strong></p>
+        <p style="font-size: 20px">There are <strong>{{ length }}</strong> search results: </p>
+        {% for result in rSet %}
+            <p>{{ result }}</p>
+        {% endfor %}
     </body>
 </html>

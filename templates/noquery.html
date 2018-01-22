@@ -2,8 +2,33 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <title>Search</title>
+        <style type="text/css">
+            .d1{
+                text-align: center;
+                line-height: 30px;
+            }
+        </style>
     </head>
     <body>
-    	Display search box here.
+        <div class="d1">
+            <h1>Searching Data in San Francisco FY14-15.csv</h1>
+            <h2>Author: Changtai Liu</h2>
+            <form action="" method="get">
+                <p>Search in Category:
+                    <select name="v">
+                        <option value="Post Date">Post Date</option>
+                        <option value="Vendor">Vendor</option>
+                        <option value="Description">Description</option>
+                        <option value="Quantity">Quantity</option>
+                        <option value="Invoice Amount">Invoice Amount</option>
+                    </select>
+                </p>
+                <p>Search for:
+                    <input type="text" name="q"/>
+                    <input type="submit" value="Search"/>
+                    <input type="reset"/></p>
+            </form>
+        </div>
     </body>
 </html>
