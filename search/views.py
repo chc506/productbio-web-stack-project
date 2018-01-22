@@ -10,7 +10,7 @@ import csv
 
 # Read csv file and search for corresonding attributes
 def search_csv( request ):
-	request = request.split(',') # the search keys for all the attributes
+	request = request.split('*') # the search keys for all the attributes
 	attributes = ['POST DATE','VENDOR','DESCRIPTION','QTY','INVOICE AMT']
 	res = {'result':[]}
 	with open('sample_data/San Francisco FY14-15.csv') as csvfile:
@@ -29,6 +29,7 @@ def search_csv( request ):
 					valid = False
 					continue
 				if k == 'INVOICE AMT': # compare the price (should be in range low - high)
+					print ("vbshshdj")
 					prices = v.split('-')
 					if len(prices) == 2:
 						low, high = prices[0], prices[1] # low, high, range inquiry
@@ -59,9 +60,7 @@ def search_csv( request ):
 
 def run_search( request ):
     ''' Search through our purchases '''
-
     query = request.GET.get( 'q', None )
-    print(query)
 
     if query is None:
         return render_to_response( 'noquery.html' )

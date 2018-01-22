@@ -57,7 +57,7 @@
 					var str = document.getElementById("key" + i).value
 					x.push(str);
 				}
-    			window.location.href += "?q=" + x.join(); // Use ',' as delimeter
+    			window.location.href += "?q=" + x.join("*"); // Use '*' as delimeter, to allow searching for number with comma, eg. 1,000
 			}
 			function keyup(e) {
     			if (e.keyCode === 13) { //enter pressed
