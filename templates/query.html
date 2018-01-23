@@ -4,16 +4,52 @@
         <meta charset="utf-8">
         <title>Search Result</title>
         <style type="text/css">
-            p{
+            div,p{
                 text-align: center;
+            }
+            table {
+                height: 80%;
+                width: 80%;
+                margin: 10px auto;
             }
         </style>
     </head>
     <body>
     	<p style="font-size: 20px">You searched for: <strong>{{ query }}</strong> in category: <strong>{{ value }}</strong></p>
-        <p style="font-size: 20px">There are <strong>{{ length }}</strong> search results: </p>
-        {% for result in rSet %}
-            <p>{{ result }}</p>
-        {% endfor %}
+        {% if rSet %}
+        <p style="font-size: 20px">There are <strong>{{ rSet|length }}</strong> search results: </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Post Date</th>
+                    <th>Vendor</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Invoice Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for my_item in itemSet %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{my_item.pDate}}</td>
+                    <td>{{my_item.vendor}}</td>
+                    <td>{{my_item.description}}</td>
+                    <td>{{my_item.quantity}}</td>
+                    <td>{{my_item.invAmt}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!--{% for result in rSet %}-->
+            <!--<p>{{ result }}</p>-->
+        <!--{% endfor %}-->
+        {% else %}
+        <p style="font-size: 20px">Your search does not match any result in our database. </p>
+        {% endif %}
+        <div>
+            <a href="noquery.html" style="font-size: 20px; color: red">Do another search</a>
+        </div>
     </body>
 </html>

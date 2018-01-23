@@ -18,8 +18,8 @@ def run_search(request):
         return render_to_response('noquery.html')
 
     # TODO: Properly handle search query.
-    rSet=searchFor(query,value)
-    return render_to_response('query.html',{'query':query, 'value':value, 'rSet':rSet, 'length':len(rSet)})
+    my_item_set, resultSet=searchFor(query,value)
+    return render_to_response('query.html',{'query':query, 'value':value, 'rSet':resultSet, 'itemSet':my_item_set})
 
 
 def csvRead():
@@ -44,39 +44,58 @@ def csvRead():
 
 def searchFor(query, value):
     postDate, vendor, description, quantity, invoiceAmount,item=csvRead()
+    my_item_set=[]
     resultSet=[]
     if value=='Post Date':
         counter=0
         for pDate in postDate:
             if pDate.lower().find(query.lower())!=-1:
+                my_item_set.append(my_item(postDate[counter],vendor[counter],description[counter],quantity[counter],
+                                           invoiceAmount[counter]))
                 resultSet.append(item[counter][0:-5])
             counter+=1
-        return resultSet
+        return my_item_set,resultSet
     if value=='Vendor':
         counter=0
         for ven in vendor:
             if ven.lower().find(query.lower())!=-1:
+                my_item_set.append(my_item(postDate[counter], vendor[counter], description[counter], quantity[counter],
+                                           invoiceAmount[counter]))
                 resultSet.append(item[counter][0:-5])
             counter+=1
-        return resultSet
+        return my_item_set,resultSet
     if value=='Description':
         counter=0
         for des in description:
             if des.lower().find(query.lower())!=-1:
+                my_item_set.append(my_item(postDate[counter], vendor[counter], description[counter], quantity[counter],
+                                           invoiceAmount[counter]))
                 resultSet.append(item[counter][0:-5])
             counter+=1
-        return resultSet
+        return my_item_set,resultSet
     if value=='Quantity':
         counter=0
         for quan in quantity:
             if quan.lower()==query.lower():
+                my_item_set.append(my_item(postDate[counter], vendor[counter], description[counter], quantity[counter],
+                                           invoiceAmount[counter]))
                 resultSet.append(item[counter][0:-5])
             counter+=1
-        return resultSet
+        return my_item_set,resultSet
     if value=='Invoice Amount':
         counter=0
         for inAmt in invoiceAmount:
             if inAmt.lower().find(query.lower())==3:
+                my_item_set.append(my_item(postDate[counter], vendor[counter], description[counter], quantity[counter],
+                                           invoiceAmount[counter]))
                 resultSet.append(item[counter][0:-5])
             counter+=1
-        return resultSet
+        return my_item_set,resultSet
+
+class my_item(object):
+    def __init__(self, pDate, vendor, description, quantity, invAmt):
+        self.pDate = pDate
+        self.vendor = vendor
+        self.description=description
+        self.quantity=quantity
+        self.invAmt=invAmt
